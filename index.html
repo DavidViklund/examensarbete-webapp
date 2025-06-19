@@ -1,34 +1,78 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Examensarbete – UI/UX-förbättring</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Fix a Broken Design System</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <button id="toggle-theme">Byt till mörkt läge</button>
+
   <main>
-    <h1>Examensarbete – UI/UX-förbättring</h1>
-    <p>Den här sidan ger en överblick av mitt examensarbete och länkar direkt till rapporten i PDF-format.</p>
+    <h1>How to Fix a Broken Design System</h1>
+    <p><strong>David Viklund – Examensarbete UX/UI, Chas Academy</strong></p>
 
-    <section>
-      <a href="Examensarbete.pdf" target="_blank" class="button">Läs hela examensarbetet</a>
+    <nav class="tab-nav">
+      <button class="tab-button active" data-tab="summary">Sammanfattning</button>
+      <button class="tab-button" data-tab="insights">Insikter</button>
+      <button class="tab-button" data-tab="download">Ladda ner PDF</button>
+    </nav>
+
+    <section id="summary" class="tab-content active">
+      <h2>Sammanfattning</h2>
+      <p>Mitt examensarbete undersöker vad som händer när design inte integreras i process, struktur och teknik. Genom att kartlägga problem i en verklig UI-miljö föreslår jag ett förbättrat arbetssätt där användarupplevelse, systemförvaltning och designsystem samverkar.</p>
+
+      <h3>Lösning</h3>
+      <p>Jag skapade en förbättrad huvudvy för tekniker, en reviderad processkarta och dokumenterade hur designsystem och komponentbibliotek bör användas.</p>
+
+      <h3>Slutsats</h3>
+      <p>Design är inte ett lager man lägger på i slutet – det är en bärande del av hela konstruktionen.</p>
     </section>
 
-    <section>
-      <h2>Om applikationen</h2>
-      <p>Applikationen har två sektioner: en introduktion och en länk till PDF-rapporten. Den är responsiv och tillgänglighetsanpassad.</p>
+    <section id="insights" class="tab-content">
+      <h2>Nyckelinsikter</h2>
+      <ul>
+        <li>Double Diamond-metoden användes som ramverk</li>
+        <li>Designsystem fanns – men implementerades inte</li>
+        <li>UX kopplades in för sent i processen</li>
+        <li>Användarbehov ignorerades i flera steg</li>
+      </ul>
     </section>
 
-    <section>
-      <h2>Kontakt</h2>
-      <p>Vill du veta mer om mitt arbete eller diskutera vidare? Kontakta mig gärna via e-post:</p>
-      <a href="mailto:david.viklund@gmail.com" class="button">Skicka e-post</a>
+    <section id="download" class="tab-content">
+      <h2>Ladda ner PDF</h2>
+      <p><a href="Examensarbete-David-Viklund.pdf" download>Klicka här för att ladda ner examensrapporten (PDF)</a></p>
     </section>
-
-    <footer>
-      <p>© 2025 David Viklund</p>
-    </footer>
   </main>
+
+  <footer>
+    <p>© 2025 David Viklund – Chas Academy</p>
+  </footer>
+
+  <script>
+    // Tab-funktion
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(tab => tab.classList.remove('active'));
+
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Mörkt/ljust läge
+    const themeButton = document.getElementById('toggle-theme');
+    themeButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      themeButton.textContent = document.body.classList.contains('dark-mode')
+        ? 'Byt till ljust läge'
+        : 'Byt till mörkt läge';
+    });
+  </script>
 </body>
 </html>
